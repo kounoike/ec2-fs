@@ -3,7 +3,7 @@
 stack=$(aws cloudformation describe-stacks --stack-name KounoikeEc2Stack)
 if [ $? != 0 ]; then
     pushd $(dirname $0)/cdk
-    cdk deploy --role-arn arn:aws:iam::753232328716:role/kounoike-cfn
+    cdk deploy
     popd
 
     stack=$(aws cloudformation describe-stacks --stack-name KounoikeEc2Stack)
