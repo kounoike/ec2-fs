@@ -14,4 +14,4 @@ if [ $? != 0 ]; then
 fi
 
 ec2=$(echo "$stack" | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="EC2Instance") | .OutputValue')
-ec2ip=$(echo "$stack" | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="EC2IP") | .OutputValue')
+ec2ip=$(aws ec2 describe-instances --instance-ids $ec2 | jq -r .Reservations[].Instances[].PublicIpAddress)

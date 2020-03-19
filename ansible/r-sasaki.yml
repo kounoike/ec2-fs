@@ -1,0 +1,25 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Add r-sasaki group
+      group:
+        name: r-sasaki
+        state: present
+    - name: Add r-sasaki user
+      user:
+        name: r-sasaki
+        group: r-sasaki
+        groups: r-sasaki,users,docker
+        state: present
+    - name: Set authorized key defining key options
+      authorized_key:
+        user: r-sasaki
+        state: present
+        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdhKKi3Kn7/nDTVaA/4qlyYqxacTxN6pqmJF4nfoj4yuMgRJOMMp6YPKlLVElfvDqqduCrMZ8vtb37v4bYCHEUoO+qrc7X9Y41CYwxH/x2/iniUq/hiPVFKEhM46zfojWkyAgtQgMxYdcbLt8oz9zUvnlBbKq9o9L6AAtvgxfG0fnt68uAGFgrrSllrZD/zSo97e7SgP6E8wUjHFNwKZDlP3YAoR8bSDDfD+bF+QaFgQXTmOVi3sJK1VlsgPlrR000DEAWsFuGUsIJIxjKQX1EAswgzpxVbgFeeEkgstTxshtem5q+fMb450yugy4GIQ5V3zmarbTo9R3F169SXfKv y-sasaki@rigel.co.jp"
+    - name: set sudoers
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^r-sasaki\s'
+        line: 'r-sasaki ALL=(ALL) NOPASSWD:ALL'
+      

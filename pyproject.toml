@@ -7,6 +7,8 @@ authors = ["Yuusuke KOUNOIKE <yuusuke.kounoike@futurestandard.co.jp>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 stacker = "^1.7.0"
+ansible = "^2.9.5"
+boto = "^2.49.0"
 
 [tool.poetry.dev-dependencies]
 

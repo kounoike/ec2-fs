@@ -1,0 +1,92 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: apt-key for docker
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: apt-repo for docker
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+    - name: apt-key for nvidia-docker
+      apt_key:
+        url: https://nvidia.github.io/nvidia-docker/gpgkey
+        state: present
+    - name: apt-repo for nvidia-docker
+      apt_repository:
+        repo: "{{ item }}"
+        state: present
+      loop:
+        - "deb https://nvidia.github.io/libnvidia-container/ubuntu18.04/$(ARCH) /"
+        - "deb https://nvidia.github.io/nvidia-container-runtime/ubuntu18.04/$(ARCH) /"
+        - "deb https://nvidia.github.io/nvidia-docker/ubuntu18.04/$(ARCH) /"
+    - name: prepare for nodejs
+      shell: "curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -"
+    - name: apt install
+      apt:
+        name:
+          - vim-nox
+          - byobu
+          - python3
+          - python3-pip
+          - peco
+          - inotify-tools
+          - byobu
+          - vim-nox
+          - python-setuptools
+          - python3
+          - python3-setuptools
+          - python3-pip
+          - build-essential
+          - libffi-dev
+          - libssl-dev
+          - zlib1g-dev
+          - liblzma-dev
+          - libbz2-dev
+          - libreadline-dev
+          - libsqlite3-dev
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - nvidia-container-runtime
+          - nvidia-utils-435
+          - nodejs
+    - name: npm
+      npm:
+        name: "{{ item }}"
+        global: yes
+      loop:
+        - aws-cdk
+    - name: pip install
+      pip:
+        executable: pip3
+        name:
+          - pipenv
+          - poetry
+    - name: aws cli get
+      unarchive:
+        src: https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip
+        dest: /opt
+        remote_src: yes
+    - name: aws cli install
+      command: /opt/aws/install --update
+    - name: go-lang
+      unarchive:
+        src: https://dl.google.com/go/go1.13.8.linux-amd64.tar.gz
+        dest: /usr/local
+        remote_src: yes
+    - name: copy go_env.sh
+      copy:
+        src: files/go_env.sh
+        dest: "/etc/profile.d/"
+        mode: 0755
+        backup: no
+        owner: root
+        group: root
+    - name: source /etc/profile.d/goenv.sh
+      shell: bash -lc "source /etc/profile.d/go_env.sh"
+      ignore_errors: yes
+    - name: go get
+      shell: >
+        bash -lc "go get github.com/x-motemen/ghq"

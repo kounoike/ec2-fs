@@ -1,4 +1,120 @@
 {
   "@aws-cdk/core:enableStackNameDuplicates": "true",
-  "aws-cdk:enableDiffNoFail": "true"
+  "aws-cdk:enableDiffNoFail": "true",
+  "vpc-provider:account=753232328716:filter.isDefault=true:region=ap-northeast-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-bb6998de",
+    "vpcCidrBlock": "172.31.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-2ebd1558",
+            "cidr": "172.31.32.0/24",
+            "availabilityZone": "ap-northeast-1a",
+            "routeTableId": "rtb-beb04ddb"
+          }
+        ]
+      },
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-2fa35358",
+            "cidr": "172.31.0.0/20",
+            "availabilityZone": "ap-northeast-1a",
+            "routeTableId": "rtb-beb04ddb"
+          },
+          {
+            "subnetId": "subnet-1c63775a",
+            "cidr": "172.31.16.0/20",
+            "availabilityZone": "ap-northeast-1c",
+            "routeTableId": "rtb-beb04ddb"
+          }
+        ]
+      }
+    ]
+  },
+  "vpc-provider:account=753232328716:filter.tag:Name=ACC-dev-Stack/ACC-dev-vpc:region=ap-northeast-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-0746d4ff3fe767a8d",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Lambda",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-0acd6303a703fe8c8",
+            "cidr": "10.0.3.0/24",
+            "availabilityZone": "ap-northeast-1a",
+            "routeTableId": "rtb-04eafbad35c081e99"
+          },
+          {
+            "subnetId": "subnet-06659151a18dd0cd5",
+            "cidr": "10.0.4.0/24",
+            "availabilityZone": "ap-northeast-1c",
+            "routeTableId": "rtb-09001178e30eacde5"
+          },
+          {
+            "subnetId": "subnet-0648925252b7c69df",
+            "cidr": "10.0.5.0/24",
+            "availabilityZone": "ap-northeast-1d",
+            "routeTableId": "rtb-0720cbbb5e19f4bb0"
+          }
+        ]
+      },
+      {
+        "name": "RDS",
+        "type": "Isolated",
+        "subnets": [
+          {
+            "subnetId": "subnet-01d4065174c4bc35b",
+            "cidr": "10.0.6.0/24",
+            "availabilityZone": "ap-northeast-1a",
+            "routeTableId": "rtb-01576e2643085b228"
+          },
+          {
+            "subnetId": "subnet-0c6c49589e798b53f",
+            "cidr": "10.0.7.0/24",
+            "availabilityZone": "ap-northeast-1c",
+            "routeTableId": "rtb-0413f6d588a7ac8a8"
+          },
+          {
+            "subnetId": "subnet-0255a7a7f87641112",
+            "cidr": "10.0.8.0/24",
+            "availabilityZone": "ap-northeast-1d",
+            "routeTableId": "rtb-0a81e281b4594f9ae"
+          }
+        ]
+      },
+      {
+        "name": "Ingress",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-04d8f6e44887040d7",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "ap-northeast-1a",
+            "routeTableId": "rtb-0401b3759d911dbfb"
+          },
+          {
+            "subnetId": "subnet-03956c28de157e110",
+            "cidr": "10.0.1.0/24",
+            "availabilityZone": "ap-northeast-1c",
+            "routeTableId": "rtb-02786ceec918bb4d8"
+          },
+          {
+            "subnetId": "subnet-0f32324103c854cee",
+            "cidr": "10.0.2.0/24",
+            "availabilityZone": "ap-northeast-1d",
+            "routeTableId": "rtb-035b0ab5db751f2ec"
+          }
+        ]
+      }
+    ]
+  }
 }
